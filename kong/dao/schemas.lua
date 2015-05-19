@@ -23,7 +23,6 @@ function _M.get_type(type_val)
   return alias and alias or type_val
 end
 
-
 -- Validate a table against a given schema
 -- @param {table} t Table to validate
 -- @param {table} schema Schema against which to validate the table
@@ -133,6 +132,12 @@ function _M.validate(t, schema, is_update)
   end
 
   return errors == nil, errors
+end
+
+local digit = "[0-9a-f]"
+local uuid_pattern = "^"..table.concat({ digit:rep(8), digit:rep(4), digit:rep(4), digit:rep(4), digit:rep(12) }, '%-').."$"
+function _M.is_valid_uuid(uuid)
+  return uuid and uuid:match(uuid_pattern) ~= nil
 end
 
 return _M
