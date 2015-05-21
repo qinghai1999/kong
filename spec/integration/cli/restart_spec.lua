@@ -35,7 +35,7 @@ describe("CLI", function()
 
   it("should not restart kong when the port is taken", function()
     spec_helper.stop_kong()
-    local thread = spec_helper.start_tcp_server(spec_helper.TEST_PROXY_PORT)
+    local thread = spec_helper.start_tcp_server(spec_helper.TEST_PROXY_PORT, true, true)
     local ok, res = pcall(spec_helper.restart_kong)
     assert.falsy(ok)
     thread:join()
